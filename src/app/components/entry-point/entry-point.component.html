@@ -1,6 +1,14 @@
-<div class="flex justify-center items center h-screen w-screen bg-black">
-  <div class="w-[80%] relative z-10">
+<div class="flex justify-center items center h-screen w-screen">
+  <aside class="w-[15.8%] h-full">
+    <app-sidebar-user-playlists></app-sidebar-user-playlists>
+  </aside>
+  <div class="background pl-[6.4rem]">
+    <header class="w-full h-[11.5%]">
+      <app-navbar-search></app-navbar-search>
+    </header>
+    <div class="w-full h-[88.5%]">
+      <router-outlet />
+    </div>
     <div class="mb-4"></div>
-    <router-outlet />
   </div>
 </div>

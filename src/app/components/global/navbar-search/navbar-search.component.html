@@ -1,0 +1,21 @@
+<div
+  #navbar
+  id="navbar"
+  class="fixed top-0 left-0 flex h-[12%] w-full z-[9999] py-5 justify-between transition-colors duration-300 ease-in-out"
+  [ngClass]="{
+    'border-b border-borders bg-black':
+      songStateService.getIsDetailOn() || generalStateService.getIsSearching(),
+    'bg-transparent':
+      !songStateService.getIsDetailOn() && !generalStateService.getIsSearching()
+  }"
+>
+  <!-- Logo -->
+  <app-logo-display
+    class="w-[9%] ml-8 mr-[9rem] h-full flex items-center text-white"
+  ></app-logo-display>
+
+  <!-- Search Bar -->
+  <app-search-input class="w-[37%] h-full"></app-search-input>
+
+  <div class="w-[17%]"></div>
+</div>

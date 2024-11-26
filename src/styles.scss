@@ -1,0 +1,24 @@
+/* src/styles.css */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.custom-scroll {
+  scrollbar-width: medium; /* Grosor del scroll en Firefox */
+  scrollbar-color: #212121 transparent; /* Color del thumb y track del scroll */
+}
+
+.custom-scroll::-webkit-scrollbar {
+  width: 8px; /* Grosor del scrollbar en WebKit (Chrome, Safari, etc.) */
+  height: 8px; /* Para el scroll horizontal */
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  background-color: #212121; /* Color del thumb */
+  border-radius: 4px; /* Bordes redondeados del thumb */
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+  background-color: transparent; /* Fondo transparente en el track */
+}

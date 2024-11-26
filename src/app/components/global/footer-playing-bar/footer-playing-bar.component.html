@@ -1,0 +1,91 @@
+@if(trackListDetails){
+<div
+  id="footer"
+  class="h-[12%] fixed bottom-0 left-0 z-50 w-full bg-darker text-white py-2 px-4 items-center justify-between transition-all"
+>
+  <div
+    class="absolute bottom-[calc(100%-4px)] left-0 w-full h-[4px] bg-gray-600"
+  >
+    <div class="h-full w-full bg-blue" style="width: 60%"></div>
+  </div>
+
+  <div class="flex h-full py-2 w-full justify-between">
+    <div class="flex h-full items-center gap-4">
+      <button class="text-xl" (click)="previousItem()">
+        <i class="fas fa-step-backward"></i>
+      </button>
+      @if(playMusicService.songIsPLaying()) {
+      <button class="text-2xl">
+        <i class="fas fa-pause" (click)="playMusicService.pausePlayback()"></i>
+      </button>
+      } @else {
+      <button class="text-2xl">
+        <i class="fas fa-play" (click)="playMusicService.playItem()"></i>
+      </button>
+      }
+
+      <button class="text-xl" (click)="nextItem()">
+        <i class="fas fa-step-forward"></i>
+      </button>
+      <p class="text-sm text-gray-400 text-nowrap">
+        2:19 /
+        {{
+          convertToMinutesAndSeconds(
+            trackListDetails[generalStateService.actualSong()].duration_ms
+          )
+        }}
+      </p>
+    </div>
+
+    <div
+      class="flex justify-center items-center gap-4 h-full w-full"
+      (click)="setDetail()"
+    >
+      <div
+        class="w-12 h-10 flex justify-center items-center bg-cover bg-center hover:grayscale-[80%] transition-all duration-300 cursor-pointer"
+        [ngStyle]="{
+          'background-image':
+            'url(' +
+            trackListDetails[generalStateService.actualSong()].album.images[0]
+              .url +
+            ')'
+        }"
+      ></div>
+
+      <div class="text-sm">
+        <p class="font-bold truncate">
+          {{ trackListDetails[generalStateService.actualSong()].name }}
+        </p>
+        <p class="text-gray-400 truncate">
+          {{
+            trackListDetails[generalStateService.actualSong()].artists[0].name +
+              " • " +
+              trackListDetails[generalStateService.actualSong()].album.name +
+              " • " +
+              trackListDetails[generalStateService.actualSong()].album
+                .release_date
+          }}
+        </p>
+      </div>
+    </div>
+
+    <div class="flex w-fit h-full items-center gap-4">
+      <div class="volume-control flex w-fit justify-center items-center">
+        <input
+          id="volume"
+          type="range"
+          min="0"
+          max="100"
+          value="50"
+          (input)="changeVolume($event)"
+          class="slider w-22 h-2 rounded-md cursor-pointer mr-2"
+        />
+        <span>{{ volume }}%</span>
+      </div>
+      <button class="text-xl">
+        <i class="fas fa-ellipsis-v"></i>
+      </button>
+    </div>
+  </div>
+</div>
+}

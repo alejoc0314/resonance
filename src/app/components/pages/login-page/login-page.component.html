@@ -1,0 +1,13 @@
+<div
+  class="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50 transition-all duration-300 ease-in-out text-white animate__fadeIn animate__animated"
+>
+  <div class="text-center text-white">
+    <h2 class="text-2xl mb-4">Inicia sesión con Spotify</h2>
+    <button
+      class="px-6 py-3 text-lg font-bold bg-blue text-white rounded-lg hover:bg-blue/60 focus:outline-none"
+      (click)="authStateService.redirectToSpotifyAuth()"
+    >
+      Iniciar sesión
+    </button>
+  </div>
+</div>

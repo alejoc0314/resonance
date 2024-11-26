@@ -1,0 +1,54 @@
+@if(this.generalStateService.showHome()) {
+<div
+  class="px-[5.4rem] pt-[3.4rem] text-white overflow-scroll overflow-x-hidden custom-scroll transition-all duration-300 ease-in-out animate__fadeIn animate__animated"
+  [style.height]="generalStateService.getRemainingHeight()"
+  [style.marginTop.px]="generalStateService.getNavbarHeight()"
+>
+  <h2 class="text-3xl mb-6">¿Qué quieres escuchar hoy?</h2>
+
+  <!-- Mostrar las canciones obtenidas de la API de Spotify -->
+  <div
+    class="playlists-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+    [style.paddingBottom.px]="generalStateService.getFooterHeight()"
+  >
+    @for(playlist of songStateService.getPublicSongsPlaylists(); track playlist)
+    {
+    <div
+      class="playlist-card rounded-md overflow-hidden cursor-pointer"
+      (click)="
+        transitionService.triggerTransition(
+          playlist.id,
+          'playlists',
+          '/song-detail/'
+        )
+      "
+    >
+      <div
+        class="flex justify-center items-center w-full h-48 object-cover hover:grayscale-[80%] transition-all duration-300"
+        [ngStyle]="{
+          'background-image': 'url(' + playlist.images[0].url + ')'
+        }"
+      >
+        <i class="fas fa-play text-[#cec9c9] text-3xl"></i>
+      </div>
+      <div class="p-4">
+        <p class="text-lg font-semibold">{{ playlist.name }}</p>
+        <p class="text-sm">{{ playlist.owner.display_name }}</p>
+        <p class="text-sm text-gray-600">
+          {{ playlist.tracks.total }} canciones
+        </p>
+      </div>
+    </div>
+    }
+  </div>
+</div>
+} @else {
+<div
+  class="text-white overflow-scroll overflow-x-hidden custom-scroll transition-all duration-300 ease-in-out animate__fadeIn animate__animate flex flex-col justify-center items-center"
+  [style.height]="generalStateService.getRemainingHeight()"
+  [style.marginTop.px]="generalStateService.getNavbarHeight()"
+>
+  <i class="fas fa-spinner fa-spin text-white text-4xl mb-4"></i>
+  Cargando reproductor...
+</div>
+}

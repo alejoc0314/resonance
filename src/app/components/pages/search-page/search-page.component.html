@@ -1,0 +1,27 @@
+<div
+  class="px-[15rem] pt-[3.4rem] absolute z-50 w-full h-full bg-black shadow-lg p-6 text-white overflow-y-auto overflow-x-hidden custom-scroll border-t-[0.06rem] border-darker animate__fadeIn animate__animated"
+  [style.height]="generalStateService.getRemainingHeight()"
+  [style.marginTop.px]="generalStateService.getNavbarHeight()"
+>
+  <div
+    class="playlists-container h-fit custom-scroll"
+    [style.paddingBottom.px]="generalStateService.getFooterHeight()"
+  >
+    <h2 class="mb-4">Esto fue lo que encontramos para ti</h2>
+
+    <h2 class="text-xl font-bold">Canciones</h2>
+    <app-songs-display
+      class="h-[20%] flex flex-col w-full overflow-x-auto py-4"
+    ></app-songs-display>
+
+    <h2 class="text-xl font-bold mt-10">Albumes</h2>
+    <app-albums-display
+      class="h-[20%] flex flex-col w-full overflow-x-auto py-4"
+    ></app-albums-display>
+
+    <h2 class="text-xl font-bold mt-10">Artistas</h2>
+    <app-artists-display
+      class="h-[20%] flex flex-col w-full overflow-x-auto py-4"
+    ></app-artists-display>
+  </div>
+</div>

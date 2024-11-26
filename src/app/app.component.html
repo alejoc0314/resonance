@@ -1,0 +1,16 @@
+<header class="h-fit">
+  <app-navbar-search></app-navbar-search>
+</header>
+<div
+  class="flex justify-center items center h-screen w-screen overflow-x-hidden overflow-y-hidden"
+>
+  <aside class="w-[15.8%] h-full">
+    <app-sidebar-user-playlists></app-sidebar-user-playlists>
+  </aside>
+  <div class="background h-full">
+    <router-outlet />
+  </div>
+  @if(songStateService.getIsSongSelected()){
+  <app-footer-playing-bar></app-footer-playing-bar>
+  }
+</div>

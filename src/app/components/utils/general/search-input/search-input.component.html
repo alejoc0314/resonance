@@ -1,0 +1,13 @@
+<div
+  class="flex justify-center items-center w-full h-full backdrop-blur-sm bg-[#373a34]/35 p-1 rounded-md border-[0.06rem] border-[#575852] text-sm"
+>
+  <i
+    class="fa-solid fa-magnifying-glass w-[5%] mx-3 opacity-100 text-[#575852]"
+  ></i>
+  <input
+    class="w-[95%] text-left text-[#ffffff] bg-transparent border-none placeholder-[#575852] focus:outline-none focus:placeholder-transparent"
+    placeholder="Buscar canción, artista o álbum..."
+    (keydown.enter)="searchMusic($event)"
+    type="text"
+  />
+</div>

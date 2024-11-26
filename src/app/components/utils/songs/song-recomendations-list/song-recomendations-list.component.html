@@ -1,0 +1,52 @@
+<div
+  class="w-full h-full overflow-y-scroll custom-scroll animate__animated animate__fadeIn"
+  [style.marginBottom.px]="generalStateService.getFooterHeight()"
+>
+  @for(song of trackList(); track song; let first = $first; let last = $last;
+  let index = $index) {
+  <div [id]="index" class="flex w-full h-14 overflow-hidden my-2">
+    <div
+      class="min-h-[8%] min-w-[10%] flex justify-center items-center mr-4 rounded-md bg-cover bg-center hover:backdrop-blur-sm transition-all duration-300 cursor-pointer"
+      [ngStyle]="{
+        'background-image': 'url(' + song.album.images[0].url + ')'
+      }"
+      (click)="transitionService.playNext(song.id, index, '/song-detail/')"
+    >
+      <i class="fas fa-play text-[#cec9c9] text-2xl"></i>
+    </div>
+    <div class="song-details w-[68%] flex flex-col justify-around">
+      <h3 class="song-name font-semibold w-full text-xs">
+        {{ song.name }}
+      </h3>
+      <p class="artists text-gray-400 w-full text-xs">
+        {{ song.artists[0].name + " • " + song.album.name }} •
+        <a
+          [href]="song.external_urls.spotify"
+          target="_blank"
+          class="listen-link text-blue-500 hover:underline"
+        >
+          Escuchar en Spotify
+        </a>
+      </p>
+    </div>
+
+    <div class="flex justify-center items-center w-[5%] h-full ml-auto">
+      <a
+        [href]="song.external_urls.spotify"
+        target="_blank"
+        class="listen-link text-blue-500 hover:underline block mt-2 w-full text-sm"
+      >
+        <i
+          class="fa-solid fa-ellipsis-vertical text-[#cec9c9] hover:text-white text-xl cursor-pointer"
+        ></i>
+      </a>
+    </div>
+  </div>
+
+  <div [hidden]="last" class="h-[0.06rem] w-full bg-darker"></div>
+  } @empty {
+  <p class="text-center text-darker">
+    No se encontraron canciones. Por favor, realiza una búsqueda.
+  </p>
+  }
+</div>

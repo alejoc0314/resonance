@@ -1,0 +1,61 @@
+<div class="w-full h-full">
+  @for(artist of slicedList; track artist; let first = $first; let last = $last)
+  {
+  <div class="flex w-full h-14 overflow-hidden my-2 animate__animated animate__fadeIn">
+    <div
+      class="min-h-[8%] min-w-[10%] flex justify-center items-center mr-4 rounded-md bg-cover bg-center hover:grayscale-[80%] transition-all duration-300 cursor-pointer"
+      [ngStyle]="{
+        'background-image': 'url(' + artist.images[0].url + ')'
+      }"
+      (click)="
+        transitionService.triggerTransition(
+          artist.id,
+          'artists',
+          '/song-detail/'
+        )
+      "
+    >
+      <i class="fas fa-play text-[#cec9c9] text-2xl"></i>
+    </div>
+    <div class="song-details w-[68%] flex flex-col justify-between">
+      <h3 class="song-name text-sm font-semibold w-full">
+        {{ artist.name }}
+      </h3>
+      <div class="flex artists text-sm text-gray-400 w-full">
+        <p class="w-full text-nowrap">
+          {{ artist.genres.join(", ") + " • " }}
+          <a
+            [href]="artist.external_urls.spotify"
+            target="_blank"
+            class="listen-link text-blue-500 hover:underline"
+          >
+            Escuchar en Spotify
+          </a>
+        </p>
+        <!-- Mostrar géneros de los artistas -->
+      </div>
+    </div>
+
+    <div class="flex justify-center items-center w-[10%] h-full ml-auto">
+      <i
+        class="fa-solid fa-ellipsis-vertical text-[#cec9c9] hover:text-white text-xl cursor-pointer"
+      ></i>
+    </div>
+  </div>
+
+  <div [hidden]="last" class="h-[0.06rem] w-full bg-darker"></div>
+  } @empty {
+  <p class="text-center text-darker">
+    No se encontraron artistas. Por favor, realiza una búsqueda.
+  </p>
+  }
+</div>
+
+<!-- Paginación -->
+@if(artistList){
+<app-pager-conditioner
+  [itemList]="artistList"
+  (slicedItemList)="handleSlicedItemList($event)"
+>
+</app-pager-conditioner>
+}

@@ -19,10 +19,6 @@ export class PublicSongsService {
     private authStateService: AuthStateService,
     private songStateService: SongStateService
   ) {
-    effect(() => {
-      this.publicToken();
-      console.log('cambió el token');
-    });
   }
 
   // Solicitar un token de acceso
@@ -68,15 +64,10 @@ export class PublicSongsService {
   loadTrendingPlaylists = (): void => {
     this.getAccessToken().subscribe((tokenResponse) => {
       this.publicToken.set(tokenResponse);
-
-      console.log('token', tokenResponse);
-
       if (tokenResponse && tokenResponse.access_token) {
         this.authStateService.setPublicAccessToken(tokenResponse.access_token);
         this.getTrendingPlaylists(tokenResponse.access_token).subscribe(
           (playlists) => {
-            console.log(playlists);
-
             this.songStateService.setPublicSongsPlaylists(
               playlists.playlists.items
             );

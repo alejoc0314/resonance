@@ -44,16 +44,33 @@ export class AuthStateService {
       })
       .subscribe({
         next: (response: any) => {
-          this.setPublicAccessToken(response.access_token);
           this.setAccessGranted.set(true);
           localStorage.removeItem('access_token');
+          this.setPublicAccessToken(response.access_token);
           localStorage.setItem('access_token', response.access_token);
           localStorage.setItem('refresh_token', response.refresh_token);
+
+          this.getUserProfile();
         },
         error: () => {
           this.redirectToSpotifyAuth();
         },
       });
+  }
+
+  getUserProfile() {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.getPublicAccessToken()}`,
+    });
+
+    this.http.get(`https://api.spotify.com/v1/me`, { headers }).subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+      error(err) {
+        console.error(err);
+      },
+    });
   }
 
   setDeviceId(deviceId: string): void {
